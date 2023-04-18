@@ -13,16 +13,18 @@ int main()
 
     while (1) {
         // Display prompt and read input
-        char* input = readline("prompt> ");
+        char* input = readline("\033[32mpro\033[0mmpt> ");
 
         // Check for EOF.
-        if (!input)
+        if (!input) {
+            printf("\n");
             break;
+        }
 
         // Add input to readline history.
         add_history(input);
 
-        // Do stuff...
+        printf("got: %s\n", input);
 
         // Free buffer that was allocated by readline
         free(input);
