@@ -1,10 +1,13 @@
 #include "constants.h"
+#include "execute.h"
 #include "expansion.h"
 #include "history.h"
 #include "parser.h"
 
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+
 #include <readline/readline.h>
 
 void init_readline();
@@ -12,8 +15,13 @@ void init_readline();
 int main()
 {
     init_readline();
+    int terminal_given = 0;
 
     while (1) {
+        if (terminal_given) {
+            pid_t gid = getpgid(0);
+            give_terminal_to(gid);
+        }
         char* input = readline("\033[32mpro\033[0mmpt> ");
 
         // Check for EOF.
@@ -36,8 +44,6 @@ int main()
             // expand envs
             expand_env_vars(commands[j], command_expanded);
 
-            printf("command %d: ", j);
-
             int n_args = 0;
             char* args[MAX_ARGS];
             for (int i = 0; i < MAX_ARGS; i++) {
@@ -46,10 +52,9 @@ int main()
 
             split_args(command_expanded, args, &n_args);
 
-            printf("[");
-            for (int i = 0; i < n_args; i++)
-                printf("\'%s\', ", args[i]);
-            printf("]\n");
+            int status = run_command(args, n_args, &terminal_given);
+
+            // printf("[exit code] %d\n", status);
 
             // free args
             for (int i = 0; i < MAX_ARGS; i++) {
