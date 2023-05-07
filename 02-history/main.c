@@ -5,8 +5,6 @@
 #include <unistd.h>
 #include <readline/readline.h>
 
-#define FILE_HISTORY "/tmp/dush.hist"
-
 void init_readline();
 
 int main()

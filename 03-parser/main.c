@@ -7,7 +7,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <readline/readline.h>
-#include <readline/history.h>
 
 #define MAX_ARGS 128
 #define MAX_CMDS 128
