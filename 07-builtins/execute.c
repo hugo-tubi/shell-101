@@ -1,5 +1,6 @@
 #include "constants.h"
 #include "execute.h"
+#include "builtins/index.h"
 
 #include <signal.h>
 #include <stdio.h>
@@ -30,6 +31,10 @@ void exec_program(char** args, int* pipes, int idx, int count) {
 }
 
 int run_command(char** args, int idx, int count, int* pipes, int* gid, int* terminal_given) {
+    if (is_builtin(args[0])) {
+        return run_builtin(args);
+    }
+
     pid_t child_pid;
     pid_t parent_pid = getpid();
 
@@ -106,6 +111,6 @@ void get_binary_path(const char* bin_name, char* absolute_path) {
     }
 
     // If we reach here, the binary wasn't found
-    fprintf(stderr, "Error: Could not find `%s` in PATH\n", bin_name);
+    fprintf(stderr, "dush: error: could not find `%s` in PATH\n", bin_name);
     exit(1);
 }

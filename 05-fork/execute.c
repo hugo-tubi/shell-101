@@ -86,6 +86,6 @@ void get_binary_path(const char* bin_name, char* absolute_path) {
     }
 
     // If we reach here, the binary wasn't found
-    fprintf(stderr, "Error: Could not find %s in PATH\n", bin_name);
+    fprintf(stderr, "dush: error: could not find `%s` in PATH\n", bin_name);
     exit(1);
 }
