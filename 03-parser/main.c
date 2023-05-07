@@ -1,3 +1,4 @@
+#include "constants.h"
 #include "history.h"
 #include "parser.h"
 
@@ -8,13 +9,7 @@
 #include <unistd.h>
 #include <readline/readline.h>
 
-#define MAX_ARGS 128
-#define MAX_CMDS 128
-#define MAX_TOKEN_LEN 1024
-
-void dush_add_history(char*);
 void init_readline();
-char commands[MAX_CMDS][MAX_TOKEN_LEN];
 
 int main()
 {
