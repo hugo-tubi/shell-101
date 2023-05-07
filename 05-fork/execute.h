@@ -2,6 +2,6 @@
 #define DUSH_EXECUTE_H
 
 int give_terminal_to(int);
-int run_command(char**, int, int*);
+void run_command(char**, int, int*);
 
 #endif

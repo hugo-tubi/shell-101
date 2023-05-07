@@ -52,9 +52,7 @@ int main()
 
             split_args(command_expanded, args, &n_args);
 
-            int status = run_command(args, n_args, &terminal_given);
-
-            // printf("[exit code] %d\n", status);
+            run_command(args, n_args, &terminal_given);
 
             // free args
             for (int i = 0; i < MAX_ARGS; i++) {

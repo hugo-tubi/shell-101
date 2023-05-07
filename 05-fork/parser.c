@@ -5,6 +5,7 @@
 
 void split_args(const char* input, char** args, int* n_args) {
     int i = 0, j = 0, in_quotes = 0;
+
     while (input[i] != '\0') {
         if (input[i] == '\'' || input[i] == '\"') {
             in_quotes = !in_quotes;
@@ -22,7 +23,12 @@ void split_args(const char* input, char** args, int* n_args) {
         j++;
         i++;
     }
+
     args[*n_args][j] = '\0';
+    (*n_args)++;
+
+    // we add a NULL at the end for convenience of `execve()`
+    args[*n_args] = NULL;
     (*n_args)++;
 }
 
