@@ -7,6 +7,10 @@
 #define FILE_HISTORY "/tmp/dush.hist"
 
 void dush_add_history(char* input) {
+    if (strlen(input) == 0) {
+        return;
+    }
+
     // Add to readline history.
     add_history(input);
 
